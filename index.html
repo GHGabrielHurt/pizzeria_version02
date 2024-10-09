@@ -44,32 +44,7 @@
               <a class="nav-link text_menu" href="./pages/contacto.html">Contactos</a>
             </li>
           </ul>
-            <!-- Carrito de compras en el Navbar -->
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item dropdown">
-          <a class="nav-link  " href="#" id="cartDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="bi bi-cart-fill"></i> 
-            <span class="cart-count" id="cart-count">0</span> <!-- Contador de items -->
-          </a>
-          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cartDropdown">
-            <li>
-              <div class="dropdown-item text-center ">
-                <p><strong>Mi pedido</strong></p>
-                <p id="no-items">No hay artículos en el carrito.</p>
-                <div id="cart-items"></div>
-              </div>
-            </li>
-            <li>
-              <div class="dropdown-item text-center">
-                <a id="whatsapp-button" href="#" class="btn btn-success" target="_blank">
-                  <i class="bi bi-whatsapp"></i> Enviar pedido
-                </a>
-              </div>
-            </li>
-          </ul>
-        </li>
-      </ul>
-
+    
         </div>
       </div>
     </nav>
@@ -77,8 +52,29 @@
       <img class="banner" src="./images/logo.jpeg" alt="logo">
     </div>
   </header>
+  <!-- Carrito flotante -->
+<a class="floating-cart" href="#" id="cartDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+  <i class="bi bi-cart-fill"></i>
+  <span class="cart-count" id="cart-count">0</span>
+</a>
 
-
+<!-- Dropdown del carrito -->
+<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cartDropdown">
+  <li>
+      <div class="dropdown-item text-center">
+          <p><strong>Carrito de Compras</strong></p>
+          <p id="no-items">No hay artículos en el carrito.</p>
+          <div id="cart-items"></div>
+      </div>
+  </li>
+  <li>
+      <div class="dropdown-item text-center">
+          <a id="whatsapp-button" href="#" class="btn btn-success" target="_blank">
+              <i class="bi bi-whatsapp"></i> Enviar por WhatsApp
+          </a>
+      </div>
+  </li>
+</ul>
   <main>
     <div class="contenedor_promo_tit">
       <h1 class="titulo_main">Promociones</h1>
