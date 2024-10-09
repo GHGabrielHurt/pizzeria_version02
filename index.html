@@ -138,6 +138,17 @@
 
 
     </section>
+    <!-- Toast (Popup) de Producto Agregado -->
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div id="productToast" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+      <div class="toast-body">
+        Producto agregado al carrito.
+      </div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div>
+</div>
   </main>
   <footer>
     <div class="footer_contenedor">
@@ -168,8 +179,12 @@ function addItemToCart(productName, productPrice) {
 
   // Mostrar el carrito
   updateCartDropdown();
-}
 
+  // Mostrar el popup de "Producto agregado"
+  let toastElement = document.getElementById('productToast');
+    let toast = new bootstrap.Toast(toastElement);
+    toast.show();
+  }
 // Función para actualizar el contenido del carrito en el dropdown
 function updateCartDropdown() {
   const cartItemsContainer = document.getElementById('cart-items');
