@@ -90,7 +90,7 @@
           <p class="card-text card_color">Una Grande de muzzarella y media docena de empanadas.</p>
           <p class="precio_combo card_color">$15000</p>
           <button class="btn btn-primary" onclick="addItemToCart('Promo1', 15000)">Añadir al carrito</button>
-
+          
         </div>
       </div>
       <div class="card gallery-item" style="width: 15rem;">
@@ -162,17 +162,24 @@
   <script>
      
 
-
  // Array para almacenar los items del carrito
  let cart = [];
 
 // Función para añadir un item al carrito
 function addItemToCart(productName, productPrice) {
-  // Añadir el nuevo producto al carrito
-  cart.push({name: productName, price: productPrice});
+   // Verificar si el producto ya está en el carrito
+   const existingProduct = cart.find(item => item.name === productName);
 
-  // Actualizar el contador de productos en el carrito
-  document.getElementById('cart-count').textContent = cart.length;
+if (existingProduct) {
+    // Si el producto ya está en el carrito, incrementar la cantidad
+    existingProduct.quantity += 1;
+} else {
+    // Si el producto no está en el carrito, añadirlo con cantidad 1
+    cart.push({name: productName, price: productPrice, quantity: 1});
+}
+
+// Actualizar el contador de productos en el carrito
+document.getElementById('cart-count').textContent = cart.reduce((total, item) => total + item.quantity, 0);
 
   // Mostrar el carrito
   updateCartDropdown();
@@ -205,7 +212,8 @@ cart.forEach((item, index) => {
     const itemElement = document.createElement('div');
     itemElement.className = 'd-flex justify-content-between align-items-center';
     itemElement.innerHTML = `
-        <span>${item.name}</span>
+      <span>${item.name} (x${item.quantity})</span>
+        
         <span>$${item.price.toFixed(2)}</span>
         <button class="btn btn-danger btn-sm" onclick="removeItemFromCart(${index})">-</button>
     `;
@@ -213,11 +221,14 @@ cart.forEach((item, index) => {
 
       
 
-      // Añadir el detalle del producto al mensaje de WhatsApp
-      cartDetails += `${item.name} - $${item.price.toFixed(2)}\n`;
-       // Sumar el precio del producto al total
-       totalPrice += item.price;
-    });
+        // Añadir el detalle del producto al mensaje de WhatsApp
+            cartDetails += `${item.name} (x${item.quantity}) - $${(item.price * item.quantity).toFixed(2)}\n`;
+
+            // Sumar el precio del producto al total
+            totalPrice += item.price * item.quantity;
+        });
+
+
        // Mostrar el total en el carrito
        const totalElement = document.createElement('div');
         totalElement.className = 'd-flex justify-content-between mt-3';
@@ -235,11 +246,33 @@ cart.forEach((item, index) => {
   }
 }
 function removeItemFromCart(index) {
-    cart.splice(index, 1); // Eliminar el producto del carrito
-    document.getElementById('cart-count').textContent = cart.length; // Actualizar el contador
-    updateCartDropdown(); // Actualizar el dropdown para reflejar los cambios
+    // Verificar si la cantidad es mayor a 1
+    if (cart[index].quantity > 1) {
+        cart[index].quantity -= 1; // Restar 1 a la cantidad
+    } else {
+        cart.splice(index, 1); // Si la cantidad es 1, eliminar el producto del carrito
+    }
+
+    // Actualizar el contador de productos en el carrito
+    document.getElementById('cart-count').textContent = cart.reduce((total, item) => total + item.quantity, 0);
+
+    // Actualizar el contenido del carrito
+    updateCartDropdown();
 }
 
+
+
+
+
+
+
+
+    // Función para agregar un ítem al menú del navbar
+  
+  </script>
+</body>
+
+</html>
 
 
 
